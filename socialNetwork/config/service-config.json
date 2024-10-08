@@ -79,7 +79,7 @@
   },
   "user-mongodb": {
     "keepalive_ms": 10000,
-    "addr": "user-mongodb",
+    "addr": "172.18.0.3",
     "timeout_ms": 10000,
     "port": 27017,
     "connections": 512
@@ -134,7 +134,7 @@
   "user-service": {
     "keepalive_ms": 10000,
     "netif": "eth0",
-    "addr": "user-service",
+    "addr": "172.18.100.1",
     "connections": 512,
     "timeout_ms": 10000,
     "port": 9090
