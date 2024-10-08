@@ -20,7 +20,12 @@ BUILD_DEPS="ca-certificates g++ cmake wget git libmemcached-dev automake bison f
 INST="-DCMAKE_INSTALL_PREFIX=/users/friedj/install"
 
 
-if false; then
+set -e
+set -x
+
+sudo apt-get install -y $BUILD_DEPS
+
+
   # Install mongo-c-driver
  cd /tmp \
   && wget https://github.com/mongodb/mongo-c-driver/releases/download/${LIB_MONGOC_VERSION}/mongo-c-driver-${LIB_MONGOC_VERSION}.tar.gz \
@@ -87,11 +92,12 @@ if false; then
   && git clone https://github.com/cpp-redis/cpp_redis.git \
   && cd cpp_redis && git checkout ${LIB_CPP_REDIS_VERSION} \
   && git submodule init && git submodule update \
+  && { echo "#include <thread>"; echo "#include <chrono>"; cat sources/core/client.cpp; } > temp && mv temp sources/core/client.cpp \
   && mkdir cmake-build && cd cmake-build \
   && cmake .. -DCMAKE_BUILD_TYPE=Release ${INST} \
   && make -j$(nproc) \
   && make install 
-fi
+
    cd /tmp \
   && git clone https://github.com/CopernicaMarketingSoftware/AMQP-CPP.git \
   && cd AMQP-CPP && git checkout v${LIB_AMQP_CPP_VERSION} \
@@ -111,7 +117,7 @@ fi
   && cd hiredis \
   && git checkout v${LIB_HIREDIS_VERSION} \
   && make -j$(nproc) USE_SSL=1 PREFIX=/users/friedj/install \
-  && make USE_SSL=1 PREFIX=/users/friedj/install  \
+  && make USE_SSL=1 PREFIX=/users/friedj/install install  \
   && cd /tmp \
   && git clone https://github.com/sewenew/redis-plus-plus.git \
   && cd redis-plus-plus \

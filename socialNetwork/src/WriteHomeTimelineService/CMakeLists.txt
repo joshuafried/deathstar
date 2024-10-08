@@ -22,11 +22,11 @@ target_link_libraries(
     Boost::log
     Boost::log_setup
     OpenSSL::SSL
-    /usr/local/lib/libjaegertracing.so
-    /usr/local/lib/libamqpcpp.so
+jaegertracing
+amqpcpp
     ${LIBEVENT_LIBRARIES}
-    /usr/local/lib/libcpp_redis.a
-    /usr/local/lib/libtacopie.a
+cpp_redis
+tacopie
 )
 
 install(TARGETS WriteHomeTimelineService DESTINATION ./)
