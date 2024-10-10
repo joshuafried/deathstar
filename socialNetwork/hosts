@@ -1,0 +1,38 @@
+#
+# Hosts Database.
+#
+127.0.0.1               localhost loghost
+
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+172.32.0.5 social-graph-service
+172.32.0.29 social-graph-mongodb
+172.32.0.7 social-graph-redis
+172.32.0.15 home-timeline-redis
+172.32.0.16 compose-post-service
+172.32.0.8 post-storage-service
+172.32.0.10 post-storage-memcached
+172.32.0.21 post-storage-mongodb
+172.32.0.22 user-timeline-service
+172.32.0.6 user-timeline-redis
+172.32.0.10 user-timeline-mongodb
+172.32.0.25 url-shorten-service
+172.32.0.4 url-shorten-memcached
+172.32.0.24 url-shorten-mongodb
+172.32.0.17 user-service
+172.32.0.12 user-memcached
+172.32.0.11 user-mongodb
+172.32.0.3 media-service
+#172.32.0. media-memcached
+#media-mongodb
+172.32.0.13 text-service
+172.32.0.2 unique-id-service
+172.32.0.20 user-mention-service
+172.32.0.23 home-timeline-service
+172.32.0.28 jaeger-agent
