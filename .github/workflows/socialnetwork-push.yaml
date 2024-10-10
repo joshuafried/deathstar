@@ -3,9 +3,7 @@ concurrency: ci-socialNetwork
 
 on:
   push: 
-    branches: [ master ]
-    paths: 
-      - 'socialNetwork/**'
+    branches: []
 
 env:
   IMAGE_BASE_NAME: 'deathstarbench/social-network-microservices'
