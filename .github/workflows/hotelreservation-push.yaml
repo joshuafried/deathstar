@@ -3,9 +3,7 @@ concurrency: ci-hotelReservation
 
 on:
   push:
-    branches: [ master ]
-    paths:
-      - 'hotelReservation/**'
+    branches: [  ]
 
 env:
   IMAGE_BASE_NAME: 'deathstarbench/hotel-reservation'
