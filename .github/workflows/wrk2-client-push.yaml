@@ -3,9 +3,8 @@ concurrency: ci-wrk2-client
 
 on:
   push: 
-    branches: [ master ]
-    paths: 
-      - 'wrk2/**'
+    branches: [  ]
+
 
 env:
   IMAGE_BASE_NAME: 'deathstarbench/wrk2-client'
