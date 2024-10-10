@@ -281,21 +281,22 @@ services:
   #     socialnet:
   #       ipv4_address: 172.32.0.2
 
-  # user-mention-service:
-  #   image: deathstarbench/social-network-microservices:latest
-  #   hostname: user-mention-service
-  #   #    ports:
-  #   #      - 10009:9090
-  #   depends_on:
-  #     jaeger-agent:
-  #       condition: service_started
-  #   restart: always
-  #   entrypoint: UserMentionService
-  #   volumes:
-  #     - ./config:/social-network-microservices/config
-  #   networks:
-  #     socialnet:
-  #       ipv4_address: 172.32.0.20
+  user-mention-service:
+    image: deathstarbench/social-network-microservices:latest
+    hostname: user-mention-service
+    #    ports:
+    #      - 10009:9090
+    depends_on:
+      jaeger-agent:
+        condition: service_started
+    restart: always
+    entrypoint: UserMentionService
+    volumes:
+      - ./config:/social-network-microservices/config
+    runtime: junction
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.20
 
   # home-timeline-service:
   #   image: deathstarbench/social-network-microservices:latest
@@ -351,12 +352,12 @@ services:
 
   jaeger-agent:
     image: jaegertracing/all-in-one:latest
-    ports:
+    #ports:
       #      - 5775:5775/udp
       #      - 6831:6831/udp
       #      - 6832:6832/udp
       #      - 5778:5778
-      - 16686:16686
+      # - 16686:16686
       #      - 14268:14268
       #      - 9411:9411
     restart: always
