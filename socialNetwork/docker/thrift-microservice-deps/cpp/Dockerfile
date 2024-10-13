@@ -1,9 +1,9 @@
-FROM ubuntu:16.04
+FROM ubuntu:22.04
 
 ARG LIB_MONGOC_VERSION=1.15.0
 ARG LIB_THRIFT_VERSION=0.12.0
 ARG LIB_JSON_VERSION=3.6.1
-ARG LIB_JAEGER_VERSION=0.4.2
+ARG LIB_JAEGER_VERSION=0.5.0
 ARG LIB_YAML_VERSION=0.6.2
 ARG LIB_OPENTRACING_VERSION=1.5.1
 ARG LIB_CPP_JWT_VERSION=1.1.1
@@ -17,6 +17,16 @@ ARG BUILD_DEPS="ca-certificates g++ cmake wget git libmemcached-dev automake bis
 
 RUN apt-get update \
   && apt-get install -y ${BUILD_DEPS} --no-install-recommends \
+  && cd /tmp \
+  # Install lib-thrift
+  && wget -O thrift-${LIB_THRIFT_VERSION}.tar.gz https://github.com/apache/thrift/archive/v${LIB_THRIFT_VERSION}.tar.gz \
+  && tar -zxf thrift-${LIB_THRIFT_VERSION}.tar.gz \
+  && cd thrift-${LIB_THRIFT_VERSION} \
+  && mkdir -p cmake-build \
+  && cd cmake-build \
+  && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=0 -DBUILD_NODEJS=0 -DBUILD_JAVASCRIPT=0 -DBUILD_PYTHON=0 .. \
+  && make -j$(nproc) \
+  && make install \
   # Install mongo-c-driver
   && cd /tmp \
   && wget https://github.com/mongodb/mongo-c-driver/releases/download/${LIB_MONGOC_VERSION}/mongo-c-driver-${LIB_MONGOC_VERSION}.tar.gz \
@@ -25,16 +35,6 @@ RUN apt-get update \
   && mkdir -p cmake-build \
   && cd cmake-build \
   && cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_TESTS=0 -DENABLE_EXAMPLES=0 .. \
-  && make -j$(nproc) \
-  && make install \
-  && cd /tmp \
-  # Install lib-thrift
-  && wget -O thrift-${LIB_THRIFT_VERSION}.tar.gz https://github.com/apache/thrift/archive/v${LIB_THRIFT_VERSION}.tar.gz \
-  && tar -zxf thrift-${LIB_THRIFT_VERSION}.tar.gz \
-  && cd thrift-${LIB_THRIFT_VERSION} \
-  && mkdir -p cmake-build \
-  && cd cmake-build \
-  && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=0 .. \
   && make -j$(nproc) \
   && make install \
   && cd /tmp \
@@ -92,6 +92,7 @@ RUN apt-get update \
   && git clone https://github.com/cpp-redis/cpp_redis.git \
   && cd cpp_redis && git checkout ${LIB_CPP_REDIS_VERSION} \
   && git submodule init && git submodule update \
+  && { echo "#include <thread>"; echo "#include <chrono>"; cat sources/core/client.cpp; } > temp && mv temp sources/core/client.cpp \
   && mkdir cmake-build && cd cmake-build \
   && cmake .. -DCMAKE_BUILD_TYPE=Release \
   && make -j$(nproc) \

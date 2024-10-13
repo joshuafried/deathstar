@@ -17,7 +17,7 @@ ff02::2 ip6-allrouters
 172.32.0.15 home-timeline-redis
 172.32.0.16 compose-post-service
 172.32.0.8 post-storage-service
-172.32.0.10 post-storage-memcached
+172.32.0.19 post-storage-memcached
 172.32.0.21 post-storage-mongodb
 172.32.0.22 user-timeline-service
 172.32.0.6 user-timeline-redis
@@ -29,10 +29,12 @@ ff02::2 ip6-allrouters
 172.32.0.12 user-memcached
 172.32.0.11 user-mongodb
 172.32.0.3 media-service
-#172.32.0. media-memcached
-#media-mongodb
+172.32.0.41 media-memcached
+172.32.0.40 media-mongodb
 172.32.0.13 text-service
 172.32.0.2 unique-id-service
 172.32.0.20 user-mention-service
 172.32.0.23 home-timeline-service
 172.32.0.28 jaeger-agent
+172.32.0.31 media-frontend
+172.32.0.30 nginx-thrift
