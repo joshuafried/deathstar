@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   social-graph-service:
-    image: deathstarbench/social-network-microservices:latest
+    image: social-network-microservices:latest
     hostname: social-graph-service
     #    ports:
     #      - 10000:9090
@@ -53,7 +53,7 @@ services:
         ipv4_address: 172.32.0.15
 
   compose-post-service:
-    image: deathstarbench/social-network-microservices:latest
+    image: social-network-microservices:latest
     hostname: compose-post-service
     #    ports:
     #      - 10001:9090
@@ -70,7 +70,7 @@ services:
         ipv4_address: 172.32.0.16
 
   post-storage-service:
-    image: deathstarbench/social-network-microservices:latest
+    image: social-network-microservices:latest
     hostname: post-storage-service
     # ports:
     #   - 10002:9090
@@ -112,7 +112,7 @@ services:
         ipv4_address: 172.32.0.21
 
   user-timeline-service:
-    image: deathstarbench/social-network-microservices:latest
+    image: social-network-microservices:latest
     hostname: user-timeline-service
     #    ports:
     #      - 10003:9090
@@ -153,7 +153,7 @@ services:
         ipv4_address: 172.32.0.10
 
   url-shorten-service:
-    image: deathstarbench/social-network-microservices:latest
+    image: social-network-microservices:latest
     hostname: url-shorten-service
     #    ports:
     #      - 10004:9090
@@ -194,7 +194,7 @@ services:
         ipv4_address: 172.32.0.24
 
   user-service:
-    image: deathstarbench/social-network-microservices:latest
+    image: social-network-microservices:latest
     hostname: user-service
     #    ports:
     #      - 10005:9090
@@ -275,7 +275,7 @@ services:
   #       ipv4_address: 172.32.0.40
 
   text-service:
-    image: deathstarbench/social-network-microservices:latest
+    image: social-network-microservices:latest
     hostname: text-service
     #    ports:
     #      - 10007:9090
@@ -292,7 +292,7 @@ services:
         ipv4_address: 172.32.0.13
 
   unique-id-service:
-    image: deathstarbench/social-network-microservices:latest
+    image: social-network-microservices:latest
     hostname: unique-id-service
     #    ports:
     #      - 10008:9090
@@ -309,7 +309,7 @@ services:
         ipv4_address: 172.32.0.2
 
   user-mention-service:
-    image: deathstarbench/social-network-microservices:latest
+    image: social-network-microservices:latest
     hostname: user-mention-service
     #    ports:
     #      - 10009:9090
@@ -326,7 +326,7 @@ services:
         ipv4_address: 172.32.0.20
 
   home-timeline-service:
-    image: deathstarbench/social-network-microservices:latest
+    image: social-network-microservices:latest
     hostname: home-timeline-service
     #    ports:
     #      - 10010:9090
