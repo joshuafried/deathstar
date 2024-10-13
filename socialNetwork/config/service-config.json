@@ -1,7 +1,7 @@
 {
   "social-graph-mongodb": {
     "keepalive_ms": 10000,
-    "addr": "social-graph-mongodb",
+    "addr": "172.32.0.29",
     "timeout_ms": 10000,
     "port": 27017,
     "connections": 512
@@ -10,21 +10,21 @@
   "unique-id-service": {
     "keepalive_ms": 10000,
     "netif": "eth0",
-    "addr": "unique-id-service",
+    "addr": "172.32.0.2",
     "connections": 512,
     "timeout_ms": 10000,
     "port": 9090
   },
   "media-service": {
     "keepalive_ms": 10000,
-    "addr": "media-service",
+    "addr": "172.32.0.3",
     "timeout_ms": 10000,
     "port": 9090,
     "connections": 512
   },
   "url-shorten-memcached": {
     "keepalive_ms": 10000,
-    "addr": "url-shorten-memcached",
+    "addr": "172.32.0.4",
     "timeout_ms": 10000,
     "port": 11211,
     "connections": 512,
@@ -32,14 +32,14 @@
   },
   "social-graph-service": {
     "keepalive_ms": 10000,
-    "addr": "social-graph-service",
+    "addr": "172.32.0.5",
     "timeout_ms": 10000,
     "port": 9090,
     "connections": 512
   },
   "user-timeline-redis": {
     "keepalive_ms": 10000,
-    "addr": "user-timeline-redis",
+    "addr": "172.32.0.6",
     "timeout_ms": 10000,
     "port": 6379,
     "connections": 512,
@@ -48,7 +48,7 @@
   },
   "social-graph-redis": {
     "keepalive_ms": 10000,
-    "addr": "social-graph-redis",
+    "addr": "172.32.0.7",
     "timeout_ms": 10000,
     "port": 6379,
     "connections": 512,
@@ -57,14 +57,14 @@
   },
   "post-storage-service": {
     "keepalive_ms": 10000,
-    "addr": "post-storage-service",
+    "addr": "172.32.0.8",
     "timeout_ms": 10000,
     "port": 9090,
     "connections": 512
   },
   "compose-post-redis": {
     "keepalive_ms": 10000,
-    "addr": "compose-post-redis",
+    "addr": "172.32.0.9",
     "timeout_ms": 10000,
     "port": 6379,
     "connections": 512,
@@ -72,21 +72,21 @@
   },
   "user-timeline-mongodb": {
     "keepalive_ms": 10000,
-    "addr": "user-timeline-mongodb",
+    "addr": "172.32.0.10",
     "timeout_ms": 10000,
     "port": 27017,
     "connections": 512
   },
   "user-mongodb": {
     "keepalive_ms": 10000,
-    "addr": "user-mongodb",
+    "addr": "172.32.0.11",
     "timeout_ms": 10000,
     "port": 27017,
     "connections": 512
   },
   "user-memcached": {
     "keepalive_ms": 10000,
-    "addr": "user-memcached",
+    "addr": "172.32.0.12",
     "timeout_ms": 10000,
     "port": 11211,
     "connections": 512,
@@ -101,7 +101,7 @@
   },
   "text-service": {
     "keepalive_ms": 10000,
-    "addr": "text-service",
+    "addr": "172.32.0.13",
     "timeout_ms": 10000,
     "port": 9090,
     "connections": 512
@@ -110,13 +110,13 @@
     "keepalive_ms": 10000,
     "workers": 32,
     "connections": 512,
-    "addr": "write-home-timeline-service",
+    "addr": "172.32.0.14",
     "timeout_ms": 10000,
     "port": 9090
   },
   "home-timeline-redis": {
     "keepalive_ms": 10000,
-    "addr": "home-timeline-redis",
+    "addr": "172.32.0.15",
     "timeout_ms": 10000,
     "port": 6379,
     "connections": 512,
@@ -126,7 +126,7 @@
   },
   "compose-post-service": {
     "keepalive_ms": 10000,
-    "addr": "compose-post-service",
+    "addr": "172.32.0.16",
     "timeout_ms": 10000,
     "port": 9090,
     "connections": 512
@@ -134,21 +134,21 @@
   "user-service": {
     "keepalive_ms": 10000,
     "netif": "eth0",
-    "addr": "user-service",
+    "addr": "172.32.0.17",
     "connections": 512,
     "timeout_ms": 10000,
     "port": 9090
   },
   "write-home-timeline-rabbitmq": {
     "keepalive_ms": 10000,
-    "addr": "write-home-timeline-rabbitmq",
+    "addr": "172.32.0.18",
     "timeout_ms": 10000,
     "port": 5672,
     "connections": 512
   },
   "post-storage-memcached": {
     "keepalive_ms": 10000,
-    "addr": "post-storage-memcached",
+    "addr": "172.32.0.19",
     "timeout_ms": 10000,
     "port": 11211,
     "connections": 512,
@@ -156,56 +156,56 @@
   },
   "user-mention-service": {
     "keepalive_ms": 10000,
-    "addr": "user-mention-service",
+    "addr": "172.32.0.20",
     "timeout_ms": 10000,
     "port": 9090,
     "connections": 512
   },
   "post-storage-mongodb": {
     "keepalive_ms": 10000,
-    "addr": "post-storage-mongodb",
+    "addr": "172.32.0.21",
     "timeout_ms": 10000,
     "port": 27017,
     "connections": 512
   },
   "user-timeline-service": {
     "keepalive_ms": 10000,
-    "addr": "user-timeline-service",
+    "addr": "172.32.0.22",
     "timeout_ms": 10000,
     "port": 9090,
     "connections": 512
   },
   "home-timeline-service": {
     "keepalive_ms": 10000,
-    "addr": "home-timeline-service",
+    "addr": "172.32.0.23",
     "timeout_ms": 10000,
     "port": 9090,
     "connections": 512
   },
   "url-shorten-mongodb": {
     "keepalive_ms": 10000,
-    "addr": "url-shorten-mongodb",
+    "addr": "172.32.0.24",
     "timeout_ms": 10000,
     "port": 27017,
     "connections": 512
   },
   "url-shorten-service": {
     "keepalive_ms": 10000,
-    "addr": "url-shorten-service",
+    "addr": "172.32.0.25",
     "timeout_ms": 10000,
     "port": 9090,
     "connections": 512
   },
   "redis-primary": {
     "keepalive_ms": 10000,
-    "addr": "redis-primary",
+    "addr": "172.32.0.26",
     "timeout_ms": 10000,
     "port": 6379,
     "connections": 512
   },
   "redis-replica": {
     "keepalive_ms": 10000,
-    "addr": "redis-replica",
+    "addr": "172.32.0.27",
     "timeout_ms": 10000,
     "port": 6379,
     "connections": 512

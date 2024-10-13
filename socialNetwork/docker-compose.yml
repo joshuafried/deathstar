@@ -10,51 +10,71 @@ services:
         condition: service_started
       social-graph-mongodb:
         condition: service_started
-    restart: always
+    # restart: always
     entrypoint: SocialGraphService
     volumes:
       - ./config:/social-network-microservices/config
+    runtime: ${SERVICE_RUNTIME}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.5
 
   social-graph-mongodb:
     image: mongo:4.4.6
     hostname: social-graph-mongodb
     # ports:
     #   - 27018:27017
-    restart: always
+    # restart: always
+    cpuset: ${LINUX_CPU_SET}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.29
 
   social-graph-redis:
-    image: redis
+    image: socialnet_redis
     hostname: social-graph-redis
     # ports:
     #   - 6380:6379
-    restart: always
+    # restart: always
+    runtime: ${SERVICE_RUNTIME_REDIS}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.7
 
   home-timeline-redis:
-    image: redis
+    image: socialnet_redis
     hostname: home-timeline-redis
     # ports:
     #   - 6381:6379
-    restart: always
+    # restart: always
+    runtime: ${SERVICE_RUNTIME_REDIS}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.15
 
   compose-post-service:
     image: deathstarbench/social-network-microservices:latest
     hostname: compose-post-service
     #    ports:
     #      - 10001:9090
-    restart: always
+    # restart: always
     depends_on:
       jaeger-agent:
         condition: service_started
     entrypoint: ComposePostService
     volumes:
       - ./config:/social-network-microservices/config
+    runtime: ${SERVICE_RUNTIME}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.16
 
   post-storage-service:
     image: deathstarbench/social-network-microservices:latest
     hostname: post-storage-service
-    ports:
-      - 10002:9090
-    restart: always
+    # ports:
+    #   - 10002:9090
+    # restart: always
     depends_on:
       jaeger-agent:
         condition: service_started
@@ -63,27 +83,40 @@ services:
     entrypoint: PostStorageService
     volumes:
       - ./config:/social-network-microservices/config
+    runtime: ${SERVICE_RUNTIME}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.8
+
 
   post-storage-memcached:
     image: memcached
     hostname: post-storage-memcached
     #    ports:
     #      - 11212:11211
-    restart: always
+    # restart: always
+    runtime: ${SERVICE_RUNTIME_MEMCACHED}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.19
 
   post-storage-mongodb:
     image: mongo:4.4.6
     hostname: post-storage-mongodb
     #    ports:
     #      - 27019:27017
-    restart: always
+    # restart: always
+    cpuset: ${LINUX_CPU_SET}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.21
 
   user-timeline-service:
     image: deathstarbench/social-network-microservices:latest
     hostname: user-timeline-service
     #    ports:
     #      - 10003:9090
-    restart: always
+    # restart: always
     depends_on:
       jaeger-agent:
         condition: service_started
@@ -92,27 +125,39 @@ services:
     entrypoint: UserTimelineService
     volumes:
       - ./config:/social-network-microservices/config
+    runtime: ${SERVICE_RUNTIME}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.22
 
   user-timeline-redis:
-    image: redis
+    image: socialnet_redis
     hostname: user-timeline-redis
     #    ports:
     #      - 6383:6379
-    restart: always
+    # restart: always
+    runtime: ${SERVICE_RUNTIME_REDIS}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.6
 
   user-timeline-mongodb:
     image: mongo:4.4.6
     hostname: user-timeline-mongodb
     #    ports:
     #      - 27020:27017
-    restart: always
+    # restart: always
+    cpuset: ${LINUX_CPU_SET}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.10
 
   url-shorten-service:
     image: deathstarbench/social-network-microservices:latest
     hostname: url-shorten-service
     #    ports:
     #      - 10004:9090
-    restart: always
+    # restart: always
     entrypoint: UrlShortenService
     depends_on:
       jaeger-agent:
@@ -121,27 +166,39 @@ services:
         condition: service_started
     volumes:
       - ./config:/social-network-microservices/config
+    runtime: ${SERVICE_RUNTIME}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.25
 
   url-shorten-memcached:
     image: memcached
     hostname: url-shorten-memcached
     #    ports:
     #      - 11213:11211
-    restart: always
+    # restart: always
+    runtime: ${SERVICE_RUNTIME_MEMCACHED}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.4
 
   url-shorten-mongodb:
     image: mongo:4.4.6
     hostname: url-shorten-mongodb
     #    ports:
     #      - 27021:27017
-    restart: always
+    # restart: always
+    cpuset: ${LINUX_CPU_SET}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.24
 
   user-service:
     image: deathstarbench/social-network-microservices:latest
     hostname: user-service
     #    ports:
     #      - 10005:9090
-    restart: always
+    # restart: always
     depends_on:
       jaeger-agent:
         condition: service_started
@@ -150,75 +207,106 @@ services:
     entrypoint: UserService
     volumes:
       - ./config:/social-network-microservices/config
+    runtime: ${SERVICE_RUNTIME}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.17
 
   user-memcached:
     image: memcached
     hostname: user-memcached
     #    ports:
     #      - 11214:11211
-    restart: always
+    # restart: always
+    runtime: ${SERVICE_RUNTIME_MEMCACHED}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.12
 
   user-mongodb:
     image: mongo:4.4.6
     hostname: user-mongodb
     # ports:
     #   - 27023:27017
-    restart: always
+    # restart: always
+    cpuset: ${LINUX_CPU_SET}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.11
 
-  media-service:
-    image: deathstarbench/social-network-microservices:latest
-    hostname: media-service
-    #    ports:
-    #      - 10006:9090
-    depends_on:
-      jaeger-agent:
-        condition: service_started
-      media-mongodb:
-        condition: service_started
-    restart: always
-    entrypoint: MediaService
-    volumes:
-      - ./config:/social-network-microservices/config
+  # media-service:
+  #   image: deathstarbench/social-network-microservices:latest
+  #   hostname: media-service
+  #   #    ports:
+  #   #      - 10006:9090
+  #   depends_on:
+  #     jaeger-agent:
+  #       condition: service_started
+  #     media-mongodb:
+  #       condition: service_started
+  #   # restart: always
+  #   entrypoint: MediaService
+  #   volumes:
+  #     - ./config:/social-network-microservices/config
+  #   runtime: ${SERVICE_RUNTIME}
+  #   networks:
+  #     socialnet:
+  #       ipv4_address: 172.32.0.3
 
-  media-memcached:
-    image: memcached
-    hostname: media-memcached
-    #    ports:
-    #      - 11215:11211
-    restart: always
+  # media-memcached:
+  #   image: memcached
+  #   hostname: media-memcached
+  #   #    ports:
+  #   #      - 11215:11211
+  #   runtime: ${SERVICE_RUNTIME_MEMCACHED}
+  #   # restart: always
+  #   networks:
+  #     socialnet:
+  #       ipv4_address: 172.32.0.41
 
-  media-mongodb:
-    image: mongo:4.4.6
-    hostname: media-mongodb
-    #    ports:
-    #      - 27024:27017
-    restart: always
+  # media-mongodb:
+  #   image: mongo:4.4.6
+  #   hostname: media-mongodb
+  #   #    ports:
+  #   #      - 27024:27017
+  #   # restart: always
+  #   networks:
+  #     socialnet:
+  #       ipv4_address: 172.32.0.40
 
   text-service:
     image: deathstarbench/social-network-microservices:latest
     hostname: text-service
     #    ports:
     #      - 10007:9090
-    restart: always
+    # restart: always
     depends_on:
       jaeger-agent:
         condition: service_started
     entrypoint: TextService
+    runtime: ${SERVICE_RUNTIME}
     volumes:
       - ./config:/social-network-microservices/config
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.13
 
   unique-id-service:
     image: deathstarbench/social-network-microservices:latest
     hostname: unique-id-service
     #    ports:
     #      - 10008:9090
-    restart: always
+    # restart: always
     depends_on:
       jaeger-agent:
         condition: service_started
     entrypoint: UniqueIdService
     volumes:
       - ./config:/social-network-microservices/config
+    runtime: ${SERVICE_RUNTIME}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.2
 
   user-mention-service:
     image: deathstarbench/social-network-microservices:latest
@@ -228,10 +316,14 @@ services:
     depends_on:
       jaeger-agent:
         condition: service_started
-    restart: always
+    # restart: always
     entrypoint: UserMentionService
     volumes:
       - ./config:/social-network-microservices/config
+    runtime: ${SERVICE_RUNTIME}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.20
 
   home-timeline-service:
     image: deathstarbench/social-network-microservices:latest
@@ -241,20 +333,25 @@ services:
     depends_on:
       jaeger-agent:
         condition: service_started
-    restart: always
+    # restart: always
     entrypoint: HomeTimelineService
     volumes:
       - ./config:/social-network-microservices/config
+    runtime: ${SERVICE_RUNTIME}
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.23
 
   nginx-thrift:
     image: yg397/openresty-thrift:xenial
     hostname: nginx-thrift
     ports:
       - 8080:8080
+    cpuset: ${LINUX_CPU_SET}
     depends_on:
       jaeger-agent:
         condition: service_started
-    restart: always
+    # restart: always
     volumes:
       - ./nginx-web-server/lua-scripts:/usr/local/openresty/nginx/lua-scripts
       - ./nginx-web-server/pages:/usr/local/openresty/nginx/pages
@@ -262,22 +359,29 @@ services:
       - ./nginx-web-server/jaeger-config.json:/usr/local/openresty/nginx/jaeger-config.json
       - ./gen-lua:/gen-lua
       - ./docker/openresty-thrift/lua-thrift:/usr/local/openresty/lualib/thrift
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.30
 
-  media-frontend:
-    image: yg397/media-frontend:xenial
-    hostname: media-frontend
-    ports:
-      - 8081:8080
-    restart: always
-    depends_on:
-      jaeger-agent:
-        condition: service_started
-    volumes:
-      - ./media-frontend/lua-scripts:/usr/local/openresty/nginx/lua-scripts
-      - ./media-frontend/conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+  # media-frontend:
+  #   image: yg397/media-frontend:xenial
+  #   hostname: media-frontend
+  #   ports:
+  #     - 8081:8080
+  #   restart: always
+  #   depends_on:
+  #     jaeger-agent:
+  #       condition: service_started
+  #   volumes:
+  #     - ./media-frontend/lua-scripts:/usr/local/openresty/nginx/lua-scripts
+  #     - ./media-frontend/conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+  #   networks:
+  #     socialnet:
+  #       ipv4_address: 172.32.0.31
 
   jaeger-agent:
     image: jaegertracing/all-in-one:latest
+    cpuset: ${LINUX_CPU_SET}
     ports:
       #      - 5775:5775/udp
       #      - 6831:6831/udp
@@ -286,6 +390,12 @@ services:
       - 16686:16686
       #      - 14268:14268
       #      - 9411:9411
-    restart: always
+    # restart: always
     environment:
       - COLLECTOR_ZIPKIN_HTTP_PORT=9411
+    networks:
+      socialnet:
+        ipv4_address: 172.32.0.28
+networks:
+  socialnet:
+    external: true
