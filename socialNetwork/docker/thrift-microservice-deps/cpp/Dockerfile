@@ -1,9 +1,9 @@
-FROM ubuntu:16.04
+FROM ubuntu:22.04
 
 ARG LIB_MONGOC_VERSION=1.15.0
 ARG LIB_THRIFT_VERSION=0.12.0
 ARG LIB_JSON_VERSION=3.6.1
-ARG LIB_JAEGER_VERSION=0.4.2
+ARG LIB_JAEGER_VERSION=0.5.0
 ARG LIB_YAML_VERSION=0.6.2
 ARG LIB_OPENTRACING_VERSION=1.5.1
 ARG LIB_CPP_JWT_VERSION=1.1.1
@@ -34,7 +34,7 @@ RUN apt-get update \
   && cd thrift-${LIB_THRIFT_VERSION} \
   && mkdir -p cmake-build \
   && cd cmake-build \
-  && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=0 .. \
+  && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=0 -DBUILD_NODEJS=0 -DBUILD_JAVASCRIPT=0 -DBUILD_PYTHON=0 .. \
   && make -j$(nproc) \
   && make install \
   && cd /tmp \
@@ -72,6 +72,7 @@ RUN apt-get update \
   && wget -O jaeger-client-cpp-${LIB_JAEGER_VERSION}.tar.gz https://github.com/jaegertracing/jaeger-client-cpp/archive/v${LIB_JAEGER_VERSION}.tar.gz \
   && tar -zxf jaeger-client-cpp-${LIB_JAEGER_VERSION}.tar.gz \
   && cd jaeger-client-cpp-${LIB_JAEGER_VERSION} \
+  && sed -i 's/65000/1400/g' -i src/jaegertracing/net/Socket.h \
   && mkdir -p cmake-build \
   && cd cmake-build \
   && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-fPIC" -DHUNTER_ENABLED=0 -DBUILD_TESTING=0 -DJAEGERTRACING_WITH_YAML_CPP=1 -DJAEGERTRACING_BUILD_EXAMPLES=0 .. \
@@ -91,6 +92,7 @@ RUN apt-get update \
   && git clone https://github.com/cpp-redis/cpp_redis.git \
   && cd cpp_redis && git checkout ${LIB_CPP_REDIS_VERSION} \
   && git submodule init && git submodule update \
+  && { echo "#include <thread>"; echo "#include <chrono>"; cat sources/core/client.cpp; } > temp && mv temp sources/core/client.cpp \
   && mkdir cmake-build && cd cmake-build \
   && cmake .. -DCMAKE_BUILD_TYPE=Release \
   && make -j$(nproc) \
@@ -129,7 +131,7 @@ RUN apt-get update \
   && make -j$(nproc) \
   && make install \
   # Install pyyaml
-  && pip3 install PyYAML \
+  && pip3 install PyYAML==3.12 \
   # Clean up
   && cd /tmp \
   && rm -rf \
