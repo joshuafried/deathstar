@@ -15,6 +15,7 @@ services:
     volumes:
       - ./config:/social-network-microservices/config
     runtime: ${SERVICE_RUNTIME}
+    cpuset: ${LINUX_CPU_SET}
     networks:
       socialnet:
         ipv4_address: 172.32.0.5
@@ -37,6 +38,7 @@ services:
     #   - 6380:6379
     # restart: always
     runtime: ${SERVICE_RUNTIME_REDIS}
+    cpuset: ${LINUX_CPU_SET}
     networks:
       socialnet:
         ipv4_address: 172.32.0.7
@@ -48,6 +50,7 @@ services:
     #   - 6381:6379
     # restart: always
     runtime: ${SERVICE_RUNTIME_REDIS}
+    cpuset: ${LINUX_CPU_SET}
     networks:
       socialnet:
         ipv4_address: 172.32.0.15
@@ -65,6 +68,7 @@ services:
     volumes:
       - ./config:/social-network-microservices/config
     runtime: ${SERVICE_RUNTIME}
+    cpuset: ${LINUX_CPU_SET}
     networks:
       socialnet:
         ipv4_address: 172.32.0.16
@@ -81,6 +85,7 @@ services:
       post-storage-mongodb:
         condition: service_started
     entrypoint: PostStorageService
+    cpuset: ${LINUX_CPU_SET}
     volumes:
       - ./config:/social-network-microservices/config
     runtime: ${SERVICE_RUNTIME}
@@ -95,6 +100,7 @@ services:
     #    ports:
     #      - 11212:11211
     # restart: always
+    cpuset: ${LINUX_CPU_SET}
     runtime: ${SERVICE_RUNTIME_MEMCACHED}
     networks:
       socialnet:
@@ -117,6 +123,7 @@ services:
     #    ports:
     #      - 10003:9090
     # restart: always
+    cpuset: ${LINUX_CPU_SET}
     depends_on:
       jaeger-agent:
         condition: service_started
@@ -137,6 +144,7 @@ services:
     #      - 6383:6379
     # restart: always
     runtime: ${SERVICE_RUNTIME_REDIS}
+    cpuset: ${LINUX_CPU_SET}
     networks:
       socialnet:
         ipv4_address: 172.32.0.6
@@ -167,6 +175,7 @@ services:
     volumes:
       - ./config:/social-network-microservices/config
     runtime: ${SERVICE_RUNTIME}
+    cpuset: ${LINUX_CPU_SET}
     networks:
       socialnet:
         ipv4_address: 172.32.0.25
@@ -178,6 +187,7 @@ services:
     #      - 11213:11211
     # restart: always
     runtime: ${SERVICE_RUNTIME_MEMCACHED}
+    cpuset: ${LINUX_CPU_SET}
     networks:
       socialnet:
         ipv4_address: 172.32.0.4
@@ -199,6 +209,7 @@ services:
     #    ports:
     #      - 10005:9090
     # restart: always
+    cpuset: ${LINUX_CPU_SET}
     depends_on:
       jaeger-agent:
         condition: service_started
@@ -218,6 +229,7 @@ services:
     #    ports:
     #      - 11214:11211
     # restart: always
+    cpuset: ${LINUX_CPU_SET}
     runtime: ${SERVICE_RUNTIME_MEMCACHED}
     networks:
       socialnet:
@@ -285,6 +297,7 @@ services:
         condition: service_started
     entrypoint: TextService
     runtime: ${SERVICE_RUNTIME}
+    cpuset: ${LINUX_CPU_SET}
     volumes:
       - ./config:/social-network-microservices/config
     networks:
@@ -304,6 +317,7 @@ services:
     volumes:
       - ./config:/social-network-microservices/config
     runtime: ${SERVICE_RUNTIME}
+    cpuset: ${LINUX_CPU_SET}
     networks:
       socialnet:
         ipv4_address: 172.32.0.2
@@ -321,6 +335,7 @@ services:
     volumes:
       - ./config:/social-network-microservices/config
     runtime: ${SERVICE_RUNTIME}
+    cpuset: ${LINUX_CPU_SET}
     networks:
       socialnet:
         ipv4_address: 172.32.0.20
@@ -338,6 +353,7 @@ services:
     volumes:
       - ./config:/social-network-microservices/config
     runtime: ${SERVICE_RUNTIME}
+    cpuset: ${LINUX_CPU_SET}
     networks:
       socialnet:
         ipv4_address: 172.32.0.23
